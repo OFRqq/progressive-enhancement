@@ -1,48 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>File upload met preview / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>File upload met preview / Progressive Enhancement / FDND</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/styles.css" rel="stylesheet" />
+    <style>
+    </style>
+    <script type="module">
+      const inputImg = document.getElementById("imgInput");
+      const img = document.getElementById("img");
 
-			/* Hint: Denk niet te ingewikkeld */
-		</style>
-		<script type="module">
-			/* Schrijf hier eventueel je client-side JavaScript */
-			
-			/* Hint: Met een paar regels kom je al een heel eind */
+      function getImg(event) {
+        const file = event.target.files[0]; // 0 = get the first file
 
-			/* Hint: Denk aan Sprint 5, micro-interacties en het driestappenplan:
+        // console.log(file);
+
+        let url = window.URL.createObjectURL(file);
+
+        // console.log(url)
+
+        img.src = url;
+      }
+
+      inputImg?.addEventListener("change", getImg);
+
+      /* Hint: Denk aan Sprint 5, micro-interacties en het driestappenplan:
 			   1) Zoek het element
 			   2) Voeg een event listener toe (https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event misschien?)
 			   3) Doe iets (https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications misschien?) */
 
-			/* Hint: Via JS kun je Custom Properties in CSS aanpassen
+      /* Hint: Via JS kun je Custom Properties in CSS aanpassen
 			   https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty */
-		</script>
-	</head>
-	<body>
-		<h1>File upload met preview</h1>
+    </script>
+  </head>
+  <body>
+    <h1>File upload met preview</h1>
 
-		<!-- Voor het uploaden van een bestand heb je altijd een formulier nodig.
+    <!-- Voor het uploaden van een bestand heb je altijd een formulier nodig.
 		     Dus die krijg je alvast. Maak je over de server niet druk; het gaat om de UI. -->
-		<form method="post">
+    <form method="post">
+		<div>
+      <img id="img"/>
+      <input id="imgInput" accept="image/*" type="file" />
+	</div>
+    </form>
 
-			<!-- Hint: Denk niet te ingewikkeld -->
+	<button type="submit" class="fdnd-button">Uploaden</button>
 
-			<button type="submit" class="fdnd-button">Uploaden</button>
-
-		</form>
-
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/file.mp4" width="1496" height="496" controls muted autoplay loop>
-				<a href="assets/file.mp4">assets/file.mp4</a>
-			</video>
-		</details>
-	</body>
+    <details closed>
+      <summary>Demo video</summary>
+      <video
+        src="assets/file.mp4"
+        width="1496"
+        height="496"
+        controls
+        muted
+        autoplay
+        loop
+      >
+        <a href="assets/file.mp4">assets/file.mp4</a>
+      </video>
+    </details>
+  </body>
 </html>

@@ -1,29 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Favorieten picker / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Favorieten picker / Progressive Enhancement / FDND</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/styles.css" rel="stylesheet" />
+	<style>
+		/* class color inputs */
+		.Lavendelpaars {
+		  background-color: #a675f5;
+		  color: rgb(28, 0, 106);
+		}
+		.Nachtblauw {
+		  background-color: #050542;
+		  color: rgb(194, 87, 232);
+		}
+		.Turkooisgroen {
+		  background-color: #66e5bf;
+		  color: rgb(43, 14, 36);
+		}
+		.Pastelgeel {
+		  background-color: #fffc86;
+		  color: rgb(255, 91, 91);
+		}
+	
+		/* basic styling */
+		html {
+		  input {
+			field-sizing: content;
+			border-radius: 20px;
+			min-width: 100px;
+			padding: 20px 50px;
+			color: green;
+		  }
+	
+		  #colorpicker {
+			padding:20px;
+			border-radius: 20px;
+		  }
+		  
+		}
+	  </style>
+  </head>
 
-			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+  <body>
+    <h1>Favorieten picker</h1>
 
-			/* Hint: Kijk eens naar field-sizing
-			   https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing */
-		</style>
-	</head>
+    <form>
+      <label for="search">
+        <input list="search-options" id="search" />
+        <datalist id="search-options">
+          <option>Charley Muhren</option>
+          <option>Cyd Stumpel</option>
+          <option>Dion Pieters</option>
+          <option>Dorien Drees</option>
+          <option>Joost Faber</option>
+          <option>Justus Sturkenboom</option>
+          <option>Koop Reynders</option>
+          <option>Krijn Hoetmer</option>
+          <option>Sanne 't Hooft</option>
+          <option>Suus ten Voorde</option>
+        </datalist>
+      </label>
 
-	<body>
-		<h1>Favorieten picker</h1>
+      <select id="colorpicker">
+        <option value="Lavendelpaars">paarse Koop</option>
+        <option value="Nachtblauw">Blauwe Dorien</option>
+        <option value="Turkooisgroen">Groene Sanne</option>
+        <option value="Pastelgeel">gele krijn</option>
+      </select>
 
-		<form>
-
-			<!-- Hint: hoe kun je aan een invoerelement een lijst meegeven? -->
-
-			<!-- Een lijstje met docenten
+      <!-- Hint: hoe kun je aan een invoerelement een lijst meegeven? -->
+      <!-- dit kan via een datalist, bij select springt hij erna -->
+      <!-- Een lijstje met docenten
 			Charley Muhren
 			Cyd Stumpel
 			Dion Pieters
@@ -35,21 +88,52 @@
 			Sanne 't Hooft
 			Suus ten Voorde
 			-->
-
-			<!-- De kleurcodes van FDND:
+      <!-- De kleurcodes van FDND:
 			#A675F5
 			#050542
 			#66E5BF
 			#FFFC86
 			-->
+    </form>
 
-		</form>
+    <details closed>
+      <summary>Demo video</summary>
+      <video
+        src="assets/pickers.mp4"
+        width="749"
+        height="417"
+        controls
+        muted
+        autoplay
+        loop
+      >
+        <a href="assets/pickers.mp4">assets/pickers.mp4</a>
+      </video>
+    </details>
+  </body>
 
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/pickers.mp4" width="749" height="417" controls muted autoplay loop>
-				<a href="assets/pickers.mp4">assets/pickers.mp4</a>
-			</video>
-		</details>
-	</body>
+ 
+
+  <script>
+    // herkent de select en search elementen
+    let selectElement = document.getElementById("colorpicker");
+    let searchElement = document.getElementById("search");
+
+    // colors laten herkennen tot de color-classes
+    let colors = ["Lavendelpaars", "Nachtblauw", "Turkooisgroen", "Pastelgeel"];
+
+    // een eventlistener die luisterd naar change in <select> waarbij function() uitvoert
+    selectElement.addEventListener("change", function () {
+      // verwijderd colors (alle kleur-classes)
+      searchElement.classList.remove(...colors);
+	  selectElement.classList.remove(...colors);
+
+      // haalt de value op uit de select en zet deze in selectedColor
+      let selectedColor = this.value;
+
+      // voegt de value class toe aan de search
+      document.getElementById("search").classList.add(this.value);
+	  document.getElementById("colorpicker").classList.add(this.value);
+    });
+  </script>
 </html>

@@ -1,30 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Switch control / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Switch control / Progressive Enhancement / FDND</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/styles.css" rel="stylesheet" />
+    <style>
+      /* container voor de slider */
+      .switch {
+        position: relative;
+        display: block;
+        width: 60px;
+        height: 30px;
+        border-radius: 50px;
 
-			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+        /* slider position */
+        .slider {
+          top: 0;
+          left: 0;
+          right: 1px;
+          bottom: 0;
+          position: absolute;
+          cursor: pointer;
+          background-color: #c3c3c3;
+          border-radius: 50px;
+          transition: 0.4s;
+        }
 
-			/* Hint: Hoe ver ga je qua styling? Vraag jezelf dit altijd af */
-		</style>
-	</head>
-	<body>
-		<h1>Switch control</h1>
-		
-		<!-- Hint: Safari heeft hiervoor iets bedacht, maar is dat al een standaard?
+        /* slider position before */
+        .slider:before {
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 3px;
+          bottom: 2px;
+          position: absolute;
+          background-color: rgb(255, 255, 255);
+          transition: 0.4s;
+          border-radius: 50px;
+        }
+        /* input checked = slider color */
+        input:checked + .slider {
+          background-color: #41d537;
+        }
+
+        /* input checked = slider:before active */
+        input:checked + .slider:before {
+          background-color: #e7e7e7;
+          transform: translateX(27px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Switch control</h1>
+
+    <!-- Hint: Safari heeft hiervoor iets bedacht, maar is dat al een standaard?
 		     Wat gebeurt er in browsers die dat nog niet ondersteunen? -->
+    <label class="switch">
+      <input type="checkbox" switch />
+      <span class="slider"></span>
+    </label>
 
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/switch.mp4" width="119" height="67" controls muted autoplay loop>
-				<a href="assets/switch.mp4">assets/switch.mp4</a>
-			</video>
-		</details>
-	</body>
+    <details closed>
+      <summary>Demo video</summary>
+      <video
+        src="assets/switch.mp4"
+        width="119"
+        height="67"
+        controls
+        muted
+        autoplay
+        loop
+      >
+        <a href="assets/switch.mp4">assets/switch.mp4</a>
+      </video>
+    </details>
+  </body>
 </html>
